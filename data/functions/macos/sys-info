@@ -1,3 +1,5 @@
 function sys-info {
-    return system_profiler 
+    $infos = system_profiler 
+
+    return $infos
 }
