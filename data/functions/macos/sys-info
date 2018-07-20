@@ -1,5 +1,5 @@
 function sys-info {
-    $infos = system_profiler 
+    [xml]$infos = system_profiler -xml
 
     return $infos
 }
