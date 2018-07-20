@@ -1,5 +1,0 @@
-function sys-info {
-    [xml]$infos = system_profiler -xml
-
-    return $infos
-}
