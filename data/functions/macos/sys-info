@@ -1,5 +1,12 @@
 function sys-info {
-    $infos = system_profiler SPSoftwareDataType
+
+    param(
+            [Parameter(Mandatory)]
+            [ValidateSet("SPSoftwareDataType", "SPNetworkDataType", "SPHardwareDataType")]
+            [string]$type
+    )
+
+    $infos = system_profiler SPSoftwareDataType SPNetworkDataType 
         
     return $infos
 }
