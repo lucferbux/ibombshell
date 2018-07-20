@@ -7,13 +7,13 @@ from module import Module
 
 class CustomModule(Module):
     def __init__(self):
-        information = {"Name": "OS X Text to Speech Utility",
-                       "Description": "This module will speak whatever is in the 'TEXT' option on the victim machine.",
-                       "Author": "@toolsprods"}
+        information = {"Name": "MacOS Utility to display information of the system",
+                       "Description": "This module will display information of the system in the system's victim console",
+                       "Author": "@lucferbux"}
 
         # -----------name-----default_value--description--required?
         options = {"warrior": [None, "Warrior in war", True],
-                   "message": [None, "Text to say", True]}
+                   "type": [None, "Type of the display", True]}
 
         # Constructor of the parent class
         super(CustomModule, self).__init__(information, options)
@@ -28,15 +28,20 @@ class CustomModule(Module):
                 break
 
         if warrior_exist:
-            function = """function say{
-    param(
-        [string] $message
-    )
-    say $message
-}
+            function = """
+            function sys-info {
+                param(
+                        [Parameter(Mandatory)]
+                        [ValidateSet("SPSoftwareDataType", "SPNetworkDataType", "SPHardwareDataType")]
+                        [string]$type
+                )
 
-"""
-            function += 'say -message "{}"'.format(self.args["message"])
+                $infos = system_profiler $type
+                    
+                return $infos
+            }
+            """
+            function += 'sys-info {}'.format(self.args["type"])
 
             with open('/tmp/ibs-{}'.format(self.args["warrior"]), 'a') as f:
                 f.write(function)
