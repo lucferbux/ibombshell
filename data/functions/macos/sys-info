@@ -6,7 +6,7 @@ function sys-info {
             [string]$type
     )
 
-    $infos = system_profiler SPSoftwareDataType SPNetworkDataType 
+    $infos = system_profiler $type
         
     return $infos
 }
