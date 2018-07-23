@@ -1,9 +1,6 @@
 from pathlib import Path
-
 from termcolor import colored, cprint
-
 from module import Module
-
 
 class CustomModule(Module):
     def __init__(self):
@@ -35,9 +32,7 @@ class CustomModule(Module):
                         [ValidateSet("SPSoftwareDataType", "SPNetworkDataType", "SPHardwareDataType")]
                         [string]$type
                 )
-
-                $infos = system_profiler $type
-                    
+                $infos = system_profiler $type                 
                 return $infos
             }
             """
@@ -45,8 +40,6 @@ class CustomModule(Module):
 
             with open('/tmp/ibs-{}'.format(self.args["warrior"]), 'a') as f:
                 f.write(function)
-
             cprint ('[+] Done!', 'green')
-
         else:
             cprint ('[!] Failed... Warrior don´t found', 'red')
