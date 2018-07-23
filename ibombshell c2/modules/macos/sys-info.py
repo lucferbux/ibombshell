@@ -10,7 +10,7 @@ class CustomModule(Module):
 
         # -----------name-----default_value--description--required?
         options = {"warrior": [None, "Warrior in war", True],
-                   "type": [None, "Type of the display", True]}
+                   "type": ["SPSoftwareDataType", "Type of the display [SPSoftwareDataType | SPNetworkDataType | SPHardwareDataType]", True]}
 
         # Constructor of the parent class
         super(CustomModule, self).__init__(information, options)
@@ -32,8 +32,8 @@ class CustomModule(Module):
                         [ValidateSet("SPSoftwareDataType", "SPNetworkDataType", "SPHardwareDataType")]
                         [string]$type
                 )
-                $infos = system_profiler $type                 
-                return $infos
+                $infos = system_profiler $type                
+                return $infos -replace '[^\x00-\x7F]+', ''
             }
             """
             function += 'sys-info {}'.format(self.args["type"])
